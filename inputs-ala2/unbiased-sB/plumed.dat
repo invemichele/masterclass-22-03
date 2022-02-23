@@ -1,0 +1,12 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=../input.ala2.pdb
+phi: TORSION ATOMS=@phi-2
+psi: TORSION ATOMS=@psi-2
+ene: ENERGY
+
+PRINT FMT=%g STRIDE=500 FILE=COLVAR ARG=*
+
+ENDPLUMED
+
+
