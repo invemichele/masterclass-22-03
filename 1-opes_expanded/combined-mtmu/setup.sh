@@ -3,5 +3,5 @@
 for i in {0..2}
 do
   mkdir $i
-  cp ../../inputs-ala2/input.$i.tpr $i/input.tpr
+  cp ../../inputs-ala2/input.$i.tpr $i/input.tpr || rmdir $i
 done
