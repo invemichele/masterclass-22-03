@@ -1,4 +1,7 @@
-#useful commands
+DISCLAIMER: gromacs 2020 officially does not support simulations in vacuum
+
+**useful commands**
+
 gmx_mpi grompp -f md.mdp -p topol.top -c config.gro -o input.tpr
 
 gmx_mpi trjconv -f unbiased-sA/alanine.xtc -s input.tpr -skip 300 -sep -o unbiased-sA/alanine..gro <<< "0"
