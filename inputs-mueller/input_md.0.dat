@@ -1,0 +1,13 @@
+# plumed pesmd input
+nstep        10000000
+tstep        0.005
+temperature  1.0
+friction     10.0
+plumed       ../plumed.dat
+periodic     false
+dimension    2
+idum         57859
+ipos         -0.693111,1.40842
+
+# Mueller potential on gnulot
+# set vi map;sp [-1.5:1][-0.2:2][0:20]0.15*(-200*exp(-(x-1)**2-10*y**2)-100*exp(-x**2-10*(y-0.5)**2)-170*exp(-6.5*(0.5+x)**2+11*(x+0.5)*(y-1.5)-6.5*(y-1.5)**2)+15*exp(0.7*(1+x)**2+0.6*(x+1)*(y-1)+0.7*(y-1)**2)+146.7)w pm3d

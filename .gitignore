@@ -3,3 +3,5 @@ __pycache__
 alanine[._]*
 bck.*alanine[._]*
 mdout.mdp
+log.plumed
+stats.out
