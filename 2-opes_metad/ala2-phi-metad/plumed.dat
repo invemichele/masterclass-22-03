@@ -1,0 +1,22 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=input.ala2.pdb
+phi: TORSION ATOMS=@phi-2
+psi: TORSION ATOMS=@psi-2
+ene: ENERGY
+
+metad: METAD ...
+  ARG=phi
+  PACE=500
+  SIGMA=0.2
+  HEIGHT=1.2
+  BIASFACTOR=40/2.5
+  GRID_MIN=-pi
+  GRID_MAX=pi
+  CALC_RCT
+...
+
+PRINT FMT=%g STRIDE=500 FILE=COLVAR ARG=phi,psi,ene,metad.*
+
+ENDPLUMED
+

@@ -1,0 +1,24 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=input.ala4.pdb
+phi1: TORSION ATOMS=@phi-2
+phi2: TORSION ATOMS=@phi-3
+phi3: TORSION ATOMS=@phi-4
+psi1: TORSION ATOMS=@psi-2
+psi2: TORSION ATOMS=@psi-3
+psi3: TORSION ATOMS=@psi-4
+ene: ENERGY
+
+opes: OPES_METAD ...
+  ARG=phi1,phi2,phi3
+  PACE=500
+  BARRIER=50
+  NLIST
+  #NO_ZED
+...
+
+PRINT FMT=%g STRIDE=500 FILE=COLVAR ARG=*
+
+ENDPLUMED
+
+
