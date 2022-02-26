@@ -8,7 +8,7 @@ gmx=`which gmx_mpi`
 ### optional ###
 nsteps=$[500*1000*1] #last is ns
 ntomp=2
-maxh=1:00 #h:min
+maxh="" #h:min
 filename=alanine
 plumedfile=plumed.dat
 extra_cmd=""

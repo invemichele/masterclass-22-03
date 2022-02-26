@@ -10,6 +10,8 @@ ecv: ECV_UMBRELLAS_LINE ...
   CV_MIN=-pi
   CV_MAX=pi
   SIGMA=0.2
+  SPACING=2
+  BARRIER=60
 ...
 opes: OPES_EXPANDED ARG=ecv.* PACE=500
 
