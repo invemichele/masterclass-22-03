@@ -1,0 +1,57 @@
+;	Input file
+;
+; *** Disclaimer: Gromacs 2020 officially ***
+; *** does not support vacuum simulations ***
+;
+define              =  
+; integrator
+integrator          =  md 
+nsteps              =  5000000
+dt                  =  0.002
+cutoff-scheme       =  verlet 
+;
+; removing CM translation and rotation
+comm_mode           =  Linear 
+nstcomm             =  1000
+;
+; output control 
+nstlog                   = 5000
+nstenergy                = 5000
+nstxout                  = 0
+nstvout                  = 0  
+nstfout                  = 0
+nstxout-compressed       = 500
+;
+; neighbour searching
+;nstlist             = 0 
+;ns-type             = simple 
+pbc                 = xyz 
+;rlist               = 1.0
+periodic_molecules  = no 
+;
+; electrostatic
+rcoulomb            = 1.0
+coulombtype         = Cut-off 
+;
+; vdw
+vdw-type            = Cut-off 
+rvdw                = 1.0 
+;
+; constraints
+constraints              = h-bonds 
+constraint-algorithm     = lincs
+lincs_iter               = 4
+;
+; temperature
+Tcoupl              = v-rescale 
+tc_grps             = system 
+tau_t               = 0.1
+ref_t               = 300.000 
+;
+; pression
+Pcoupl              =  no
+;
+; initial velocities
+gen_vel             = yes 
+gen_temp            = 300.000 
+gen_seed            = 9536 
