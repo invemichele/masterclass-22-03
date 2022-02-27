@@ -6,6 +6,7 @@
 import sys
 import argparse
 import numpy as np
+import pandas as pd
 do_bck=False #backup files in plumed style
 if do_bck:
   bck_script='bck.meup.sh' #e.g. place the script in your ~/bin
@@ -69,8 +70,7 @@ try:
   import datatable #datatable is faster than pandas, but less common
   data=datatable.fread(filename,header=False).to_numpy()
 except:
-  import pandas
-  data=pandas.read_table(filename,sep='\s+',header=None).to_numpy()
+  data=pd.read_table(filename,sep='\s+',header=None).to_numpy()
 fields_pos=[]
 tot_lines=data.shape[0]
 for i in range(tot_lines):
