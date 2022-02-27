@@ -8,7 +8,7 @@ tprfile=input.tpr
 gmx=`which gmx_mpi`
 
 ### optional ###
-nsteps=$[500*100] #last is ps
+nsteps=$[500*1000*10] #last is ns
 ntomp=2
 maxh="" #h:min
 filename=alanine

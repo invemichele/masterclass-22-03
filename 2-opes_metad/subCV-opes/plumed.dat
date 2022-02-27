@@ -1,0 +1,22 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=input.ala2.pdb
+phi: TORSION ATOMS=@phi-2
+psi: TORSION ATOMS=@psi-2
+
+# the mysterious suboptimal CV
+rmsdA: RMSD REFERENCE=input.sA.pdb TYPE=OPTIMAL
+rmsdB: RMSD REFERENCE=input.sB.pdb TYPE=OPTIMAL
+s: CUSTOM ARG=rmsdA,rmsdB VAR=x,y PERIODIC=NO FUNC=(1.0*exp(-169.2*x*x)+2.0*exp(-169.2*y*y))/(exp(-169.2*x*x)+exp(-169.2*y*y))
+
+opes: OPES_METAD ...
+  ARG=s
+  PACE=500
+  __FILL__
+...
+
+PRINT FMT=%g STRIDE=500 FILE=COLVAR ARG=phi,psi,s,opes.*
+
+ENDPLUMED
+
+

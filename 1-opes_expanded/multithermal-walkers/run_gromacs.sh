@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sp="../../scripts" #scripts path
+
 ### compulsory ###
 ncore=`ls -d ?| wc -l`
 tprfile=input.tpr
@@ -30,8 +32,8 @@ mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps $ma
 submit="time mpirun -np $ncore ${mpi_cmd} -pin off" #change this when submitting to a cluster
 
 ### execute ###
-bck.meup.sh -i $outfile
-bck.meup.sh -i ?/${filename}* > $outfile
+$sp/bck.meup.sh -i $outfile
+$sp/bck.meup.sh -i ?/${filename}* > $outfile
 echo -e "\n$submit &>> $outfile"
 eval "$submit &>> $outfile"
 [ -z "$extra_cmd" ] || eval $extra_cmd
