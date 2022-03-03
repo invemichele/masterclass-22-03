@@ -1,0 +1,25 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=../input.ala2.pdb
+phi: TORSION ATOMS=@phi-2
+psi: TORSION ATOMS=@psi-2
+
+# the mysterious suboptimal CV
+rmsdA: RMSD REFERENCE=../input.sA.pdb TYPE=OPTIMAL
+rmsdB: RMSD REFERENCE=../input.sB.pdb TYPE=OPTIMAL
+s: CUSTOM ARG=rmsdA,rmsdB VAR=x,y PERIODIC=NO FUNC=(1.0*exp(-169.2*x*x)+2.0*exp(-169.2*y*y))/(exp(-169.2*x*x)+exp(-169.2*y*y))
+
+opes: OPES_METAD ...
+  ARG=s
+  PACE=500
+  __FILL__
+  STATE_WFILE=STATE STATE_WSTRIDE=500*100 STORE_STATES
+...
+
+PRINT FMT=%g STRIDE=500 FILE=COLVAR ARG=phi,psi,s,opes.*
+
+ENDPLUMED
+
+Notice that without the WALKERS_MPI flag all the replicas are independent, which is what we want here.
+Instead, by adding the flag WALKERS_MPI to OPES_METAD, the replicas would share the same bias, in a multiple walkers scheme.
+You can check the alanine.log file to make sure what type of simulation was performed

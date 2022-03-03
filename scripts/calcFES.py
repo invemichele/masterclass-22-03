@@ -33,7 +33,7 @@ def calcFESpoint1Dperiodic(point, bandwidth, data, logweights, periodicity):
 
 def calcFES1D(grid, bandwidth, data, logweights=None, periodic=False, mintozero=True):
   if logweights is None:
-    logweights = np.zeros(len(data))
+    logweights = np.empty(len(data))
   if periodic is False:
     fes = np.array([calcFESpoint1D(point, bandwidth, data, logweights) for point in grid])
   else:
@@ -64,10 +64,10 @@ def calcFESpoint2Dperiodic(point, bandwidth, data, logweights, periodicity):
 
 def calcFES2D(meshgrid, bandwidth, data, logweights=None, periodic=False, mintozero=True):
   if logweights is None:
-    logweights = np.zeros(len(data[0]))
+    logweights = np.empty(len(data[0]))
 #  X, Y = np.meshgrid(grid[0], grid[1])
   X, Y = meshgrid[0], meshgrid[1]
-  fes = np.zeros((len(X), len(Y)))
+  fes = np.empty((len(X), len(Y)))
   if periodic is False:
     for i in range(len(X)):
       for j in range(len(Y)):
