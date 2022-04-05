@@ -2,11 +2,12 @@
 
 # Calculate Free Energy Surface (FES) from a trajectory using a (weighted) kernel density estimation (KDE)
 # Only 1D and 2D are currently supported, but a 3D FES is hard to visualize...
-# The calculated FES is dimensionless, and so should be the logweights (e.g. bias/kbt)
-#   fes = -log wKDE
+# The calculated FES is dimensionless, and uses the logweights (e.g. bias/kbt) instead of the weights w
+#   fes = -log w*p_{KDE}
 #
 # Contrary to scipy.stats.gaussian_kde and sklearn.neighbors.KernelDensity,
 # this supports also periodic variables
+# TODO: make it run faster
 #
 
 import numpy as np
@@ -33,7 +34,7 @@ def calcFESpoint1Dperiodic(point, bandwidth, data, logweights, periodicity):
 
 def calcFES1D(grid, bandwidth, data, logweights=None, periodic=False, mintozero=True):
   if logweights is None:
-    logweights = np.empty(len(data))
+    logweights = np.zeros(len(data))
   if periodic is False:
     fes = np.array([calcFESpoint1D(point, bandwidth, data, logweights) for point in grid])
   else:
@@ -64,7 +65,7 @@ def calcFESpoint2Dperiodic(point, bandwidth, data, logweights, periodicity):
 
 def calcFES2D(meshgrid, bandwidth, data, logweights=None, periodic=False, mintozero=True):
   if logweights is None:
-    logweights = np.empty(len(data[0]))
+    logweights = np.zeros(len(data[0]))
 #  X, Y = np.meshgrid(grid[0], grid[1])
   X, Y = meshgrid[0], meshgrid[1]
   fes = np.empty((len(X), len(Y)))
