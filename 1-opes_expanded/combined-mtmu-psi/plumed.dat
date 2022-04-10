@@ -1,0 +1,30 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=../input.ala2.pdb
+phi: TORSION ATOMS=@phi-2
+psi: TORSION ATOMS=@psi-2
+ene: ENERGY
+
+ecv_mt: ECV_MULTITHERMAL ARG=ene TEMP_MAX=1000 TEMP_STEPS=3
+ecv_umb: ECV_UMBRELLAS_LINE ...
+  ARG=psi
+  CV_MIN=-pi
+  CV_MAX=pi
+  SIGMA=0.15
+  SPACING=2
+  BARRIER=50
+...
+opes: OPES_EXPANDED ...
+  ARG=(ecv_.*)
+  PACE=500
+  FILE=../DELTAFS
+  WALKERS_MPI
+  STATE_WFILE=../STATE
+  STATE_WSTRIDE=500*100
+  STORE_STATES
+...
+
+PRINT FMT=%g STRIDE=500 FILE=COLVAR ARG=phi,psi,ene,opes.bias
+
+ENDPLUMED
+

@@ -1,0 +1,22 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=input.ala2.pdb
+phi: TORSION ATOMS=@phi-2
+psi: TORSION ATOMS=@psi-2
+ene: ENERGY
+
+ecv: ECV_UMBRELLAS_LINE ...
+  ARG=ene
+  LOWER_HALF_ONLY
+  CV_MIN=-50
+  CV_MAX=200
+  SIGMA=12.5837
+  SPACING=2
+...
+opes: OPES_EXPANDED ARG=ecv.* PACE=500
+
+PRINT FMT=%g STRIDE=500 FILE=COLVAR ARG=phi,psi,ene,opes.bias
+
+ENDPLUMED
+
+SIGMA is the standard deviation from an umbiased run

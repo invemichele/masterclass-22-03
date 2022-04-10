@@ -1,0 +1,21 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=input.ala2.pdb
+phi: TORSION ATOMS=@phi-2
+psi: TORSION ATOMS=@psi-2
+ene: ENERGY
+
+ecv: ECV_UMBRELLAS_LINE ...
+  ARG=psi
+  CV_MIN=-pi
+  CV_MAX=pi
+  SIGMA=0.2
+  SPACING=2
+  BARRIER=60
+...
+opes: OPES_EXPANDED ARG=ecv.* PACE=500
+
+PRINT FMT=%g STRIDE=500 FILE=COLVAR ARG=phi,psi,ene,opes.bias
+
+ENDPLUMED
+

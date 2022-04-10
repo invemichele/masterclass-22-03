@@ -1,0 +1,22 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=input.ala2.pdb
+phi: TORSION ATOMS=@phi-2
+psi: TORSION ATOMS=@psi-2
+ene: ENERGY
+
+ecv: ECV_UMBRELLAS_LINE ...
+  ARG=phi
+  SIGMA=1/sqrt(200)
+  CV_MIN=-pi
+  CV_MAX=pi
+  SPACING=2*pi/32*sqrt(200)
+  BARRIER=70
+...
+opes: OPES_EXPANDED ARG=ecv.* PACE=500
+
+PRINT FMT=%g STRIDE=500 FILE=COLVAR ARG=phi,psi,ene,opes.bias
+
+ENDPLUMED
+
+using parameters similar to Masterclass 21.3
