@@ -1,6 +1,6 @@
-DISCLAIMER: gromacs 2020 officially does not support simulations in vacuum
+DISCLAIMER: gromacs 2020 officially does not support simulations in vacuum, see [here](https://manual.gromacs.org/2020/release-notes/2020/major/removed-functionality.html).
 
-**useful commands**
+**useful commands:**
 
 gmx_mpi grompp -f md.mdp -p topol.top -c config.gro -o input.tpr
 
