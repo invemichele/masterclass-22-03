@@ -20,3 +20,8 @@ PRINT FMT=%g STRIDE=500 FILE=COLVAR ARG=phi,psi,ene,opes.bias
 ENDPLUMED
 
 SIGMA is the standard deviation from an umbiased run
+
+This simulation results in a broad sampling of the energy, that resembles the one obtained with ECV_MULTITHERMAL
+Notice that the LOWER_HALF_ONLY keyword is important, and without it the forces are so strong that the system would break.
+Also using OPES_METAD on the energy with a flat target distributino (BIASFACTOR=inf) would result in a very unstable simulation.
+You can try it yourself!
