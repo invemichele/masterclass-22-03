@@ -3,16 +3,16 @@
 sp="../../scripts" #scripts path
 
 ### compulsory ###
-ncore=1
+ncore=`ls -d ?| wc -l`
 tprfile=input.tpr
 gmx=`which gmx_mpi`
 
 ### optional ###
 nsteps=$[500*1000*10] #last is ns
-ntomp=2
+ntomp=1
 maxh="" #h:min
 filename=alanine
-plumedfile=plumed.dat
+plumedfile=../plumed.dat
 extra_cmd=""
 
 ### setup ###
@@ -28,12 +28,12 @@ then
 fi
 
 ### commands ###
-mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps $maxh"
+mpi_cmd="$gmx mdrun -s $tprfile -deffnm $filename $plumedfile $ntomp $nsteps $maxh -multidir ?"
 submit="time mpirun -np $ncore ${mpi_cmd} -pin off" #change this when submitting to a cluster
 
 ### execute ###
 $sp/bck.meup.sh -i $outfile
-$sp/bck.meup.sh -i ${filename}* fes_running > $outfile
+$sp/bck.meup.sh -i ?/${filename}* ?/fes_running > $outfile
 echo -e "\n$submit &>> $outfile"
 eval "$submit &>> $outfile"
 [ -z "$extra_cmd" ] || eval $extra_cmd

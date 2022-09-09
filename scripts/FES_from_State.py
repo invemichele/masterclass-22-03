@@ -69,7 +69,7 @@ explore='unset'
 try:
   import datatable #datatable is faster than pandas, but less common
   data=datatable.fread(filename,header=False).to_numpy()
-except:
+except ImportError:
   data=pd.read_table(filename,sep='\s+',header=None).to_numpy()
 fields_pos=[]
 tot_lines=data.shape[0]

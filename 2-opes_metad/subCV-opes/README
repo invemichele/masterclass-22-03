@@ -1,0 +1,4 @@
+you can copy all the files in this folder into new `subCV-metad` and `subCV-explore` folders for the other tests
+first run the `setup.sh` script, to prepare the folders for the independent replicas
+then you can run them in parallel with the `run_gromacs.sh` script
+remember to properly edit the `plumed.dat` script
