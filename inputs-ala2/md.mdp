@@ -54,4 +54,4 @@ Pcoupl              =  no
 ; initial velocities
 gen_vel             = yes 
 gen_temp            = 300.000 
-gen_seed            = 9536 
+gen_seed            = -1
