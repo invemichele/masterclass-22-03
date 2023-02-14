@@ -1,0 +1,24 @@
+video1:
+  title: Lecture I
+  location: https://www.youtube.com/embed/1XYGfA4kJ1c 
+video2:
+  title: Lecture II
+  location: https://www.youtube.com/embed/Rn5JgItgKX4
+ref1: 
+  location: 21/001
+ref2: 
+  location: 21/003 
+ref3: 
+  location: 21/004
+ref4:
+  location: https://pubs.acs.org/doi/10.1021/acs.jpclett.0c00497
+  type: external
+ref5:
+  location: https://arxiv.org/abs/2201.09950
+  type: external
+ref6:
+  location: https://journals.aps.org/prx/abstract/10.1103/PhysRevX.10.041034
+  type: external
+ref7: 
+  location: https://docs.google.com/presentation/d/1G94Kjq3kn3sNxFi2fZoISG3OMNq_erGIgleyr8y2YEA/edit#slide=id.g745e936a15_3_45
+  type: external 
