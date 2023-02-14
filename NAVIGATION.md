@@ -2,9 +2,9 @@
 
 This lesson was given as part of the PLUMED masterclass series in 2022.  It includes:
 
-* Two videos that describe the theory. 
+* Two videos, one about the theory and one about the exercises.
 * A series of exercises for you to complete.
-* A python notebook that contains a full solution to the exercises.
+* Two python notebooks that contain the full solutions to the exercises.
 
 The flow chart shown below indicates the order in which you should consult the resources.  You can click on the nodes to access the various resources.  Follow the thick black lines for the best results.  The resources that are connected by dashed lines are supplmentary resources that you may find useful when completing the exercise.
 
@@ -34,15 +34,15 @@ flowchart TB;
   click A "ref1" "A previous tutorial that introduces the basics of PLUMED syntax";
   click B "ref2" "A previous tutorial that introduces umbrella sampling";
   click C "ref3" "A previous tutorial that introduces metadynamics";
-  click D "ref4" "A paper on the OPES method";
-  click E "ref5" "Another paper on the OPES method";
-  click F "ref6" "Yet another paper on the OPES method"; 
+  click D "ref4" "The paper that introduces the OPES method (OPES_METAD)";
+  click E "ref5" "The paper about the exploration variant of the OPES method (OPES_METAD_EXPLORE)";
+  click F "ref6" "The paper on the OPES method for expanded ensembles (OPES_EXPANDED)";
   click G "video1" "A lecture that was given on February 28th 2022 as part of the plumed masterclass series that introduces you to the exercises in this lesson";
   click H "ref7" "The slides that were used in the lecture";
-  click I "THEORY.md" "An introduction to the theory";
+  click I "THEORY.md" "An introduction to the OPES theory";
   click J "INSTRUCTIONS.md" "Instructions for the exercises that you are supposed to complete";
-  click K "MORE_THEORY.md" "Some more theoretical details";
+  click K "MORE_THEORY.md" "An explicit example of the analytical formula of the bias for OPES_EXPANDED is defined";
   click L "video2" "A lecture that was given on March 7th 2022 as part of the plumed masterclass series that goes through the solutions to the exercises in the lesson";
-  click M "notebooks/1-opes_expanded.ipynb" "A python notebook where the answers to the exericses are discussed";
-  click N "notebooks/2-opes_metad.ipynb" "A python notebook where the answers to the exercises are discussed";
+  click M "notebooks/1-opes_expanded.ipynb" "A python notebook that presents the OPES method for replica-exchange-like sampling (OPES_EXPANDED)";
+  click N "notebooks/2-opes_metad.ipynb" "A python notebook that presents the OPES method for metadynamics-like sampling (OPES_METAD)";
 ```
