@@ -72,7 +72,7 @@ Here instead, we want to sample the same multithermal distribution not by combin
 You can find details on the relevant theory by searching through the graph for this tutorial.
 
 <details>
-    <summary>The bias that we need</summary>
+    <summary><u>Click to expand</u></summary>
 
 We choose 3 temperatures $T_0, T_1, T_2$, ranging from 300 K to 1000 K, and setup our GROMACS simulation to run at $T_0=300$ K.
 Our target distribution is then:
