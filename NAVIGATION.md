@@ -33,7 +33,7 @@ flowchart TB;
 ```
 
 ## References
-1. M. Invernizzi, P. Piaggi, and M. Parrinello, [Unified Approach to Enhanced Sampling](https://journals.aps.org/prx/abstract/10.1103/PhysRevX.10.041034), PRX 2020
-2. M. Invernizzi and M. Parrinello, [Rethinking Metadynamics: From Bias Potentials to Probability Distributions](https://pubs.acs.org/doi/10.1021/acs.jpclett.0c00497), JPCL 2020
-3. M. Invernizzi, and M. Parrinello, [Exploration vs Convergence Speed in Adaptive-Bias Enhanced Sampling](https://pubs.acs.org/doi/10.1021/acs.jctc.2c00152), JCTC 2022
+1. Invernizzi, Piaggi, and Parrinello, [Unified Approach to Enhanced Sampling](https://journals.aps.org/prx/abstract/10.1103/PhysRevX.10.041034), PRX (2020)
+2. Invernizzi and Parrinello, [Rethinking Metadynamics: From Bias Potentials to Probability Distributions](https://pubs.acs.org/doi/10.1021/acs.jpclett.0c00497), JPCL (2020)
+3. Invernizzi and Parrinello, [Exploration vs Convergence Speed in Adaptive-Bias Enhanced Sampling](https://pubs.acs.org/doi/10.1021/acs.jctc.2c00152), JCTC (2022)
 
