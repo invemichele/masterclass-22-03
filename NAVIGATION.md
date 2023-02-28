@@ -12,37 +12,28 @@ This lesson was the third masterclass in the 2022 series.
 
 ```mermaid
 flowchart TB;
-  A[ref1] -.-> G[Lecture I];
-  B[ref2] -.-> G;
-  C[ref3] -.-> G;
-  D[ref4] -.-> G;
-  E[ref5] -.-> G;
-  F[ref6] -.-> G;
-  A -.-> H[Slides];
-  B -.-> H;
-  C -.-> H;
-  D -.-> H;
-  E -.-> H;
-  F -.-> H;
-  G ==> J[Instructions];
-  I[theory I] -.-> J;
-  K[theory II] -.-> J;
-  H ==> J;
-  J ==> L[Lecture II];
-  L ==> M[Solutions I];
-  L ==> N[Solutions II];
-  click A "ref1" "A previous tutorial that introduces the basics of PLUMED syntax";
-  click B "ref2" "A previous tutorial that introduces umbrella sampling";
-  click C "ref3" "A previous tutorial that introduces metadynamics";
-  click D "ref4" "The paper that introduces the OPES method (OPES_METAD)";
-  click E "ref5" "The paper about the exploration variant of the OPES method (OPES_METAD_EXPLORE)";
-  click F "ref6" "The paper on the OPES method for expanded ensembles (OPES_EXPANDED)";
-  click G "video1" "A lecture that was given on February 28th 2022 as part of the plumed masterclass series that introduces you to the exercises in this lesson";
-  click H "ref7" "The slides that were used in the lecture";
-  click I "THEORY.md" "An introduction to the OPES theory";
-  click J "INSTRUCTIONS.md" "Instructions for the exercises that you are supposed to complete";
-  click K "MORE_THEORY.md" "An explicit example of the analytical formula of the bias for OPES_EXPANDED is defined";
-  click L "video2" "A lecture that was given on March 7th 2022 as part of the plumed masterclass series that goes through the solutions to the exercises in the lesson";
-  click M "notebooks/1-opes_expanded.ipynb" "A python notebook that presents the OPES method for replica-exchange-like sampling (OPES_EXPANDED)";
-  click N "notebooks/2-opes_metad.ipynb" "A python notebook that presents the OPES method for metadynamics-like sampling (OPES_METAD)";
+  A[Umbrella Sampling] -.-> C[Lecture I];
+  B[ref2] -.-> C;
+  C ==> D[Instructions];
+  E[Slides] ==> D;
+  F[Theory] -.-> D;
+  D ==> G[Solutions OPES_EXPANDED];
+  D ==> H[Solutions OPES_METAD];
+  G ==> I[Lecture II];
+  H ==> I[Lecture II];
+  click A "ref1" "A previous tutorial that introduces umbrella sampling";
+  click B "ref2" "A previous tutorial that introduces metadynamics";
+  click C "video1" "A lecture that was given on February 28th 2022 as part of the plumed masterclass series that introduces you to the exercises in this lesson";
+  click D "INSTRUCTIONS.md" "Instructions for the exercises that you are supposed to complete";
+  click E "ref3" "The slides that were used in the lecture";
+  click F "THEORY.md" "An introduction to the OPES theory";
+  click G "notebooks/1-opes_expanded.ipynb" "A python notebook that presents the OPES method for replica-exchange-like sampling";
+  click H "notebooks/2-opes_metad.ipynb" "A python notebook that presents the OPES method for metadynamics-like sampling";
+  click I "video2" "A lecture that was given on March 7th 2022 as part of the plumed masterclass series that goes through the solutions to the exercises in the lesson";
 ```
+
+## References
+1. [Unified Approach to Enhanced Sampling](https://journals.aps.org/prx/abstract/10.1103/PhysRevX.10.041034)
+2. [Rethinking Metadynamics: From Bias Potentials to Probability Distributions](https://pubs.acs.org/doi/10.1021/acs.jpclett.0c00497)
+3. [Exploration vs Convergence Speed in Adaptive-Bias Enhanced Sampling](https://pubs.acs.org/doi/10.1021/acs.jctc.2c00152)
+
