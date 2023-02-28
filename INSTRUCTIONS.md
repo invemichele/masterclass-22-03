@@ -1,6 +1,6 @@
 # PLUMED Masterclass 22.3: OPES method
 
-## Origin 
+## Origin
 
 This masterclass was authored by Michele Invernizzi on February 28, 2022
 
@@ -32,7 +32,7 @@ Compared to metadynamics, it is faster in converging to a quasi-static bias and 
 The theory for the OPES method is presented in the papers that we give in the graph for this tutorial.
 A short overview can also be found in the PLUMED documentation at [OPES](https://www.plumed.org/doc-master/user-doc/html/_o_p_e_s.html), [OPES_EXPANDED](https://www.plumed.org/doc-master/user-doc/html/_o_p_e_s__e_x_p_a_n_d_e_d.html), [OPES_METAD](https://www.plumed.org/doc-master/user-doc/html/_o_p_e_s__m_e_t_a_d.html), and [OPES_METAD_EXPLORE](https://www.plumed.org/doc-master/user-doc/html/_o_p_e_s__m_e_t_a_d__e_x_p_l_o_r_e.html).
 
-## Setting up the software 
+## Setting up the software
 
 For this Masterclass we will use GROMACS 2020.6 patched with PLUMED 2.8, with the OPES module and MPI enabled.
 The easiest way to install all the software needed is to use the `plumed-masterclass-2022` conda environment, as described [here](https://github.com/plumed/masterclass-2022).
@@ -47,7 +47,7 @@ git clone https://github.com/invemichele/masterclass-22-03.git
 ````
 
 The repository contains all the data to run the simulations, together with the scripts to analyse them.
-It also contains some annotated [Jupyter notebooks](https://github.com/invemichele/masterclass-22-03/tree/master/notebooks), that will guide us through this tutorial. 
+It also contains some annotated [Jupyter notebooks](https://github.com/invemichele/masterclass-22-03/tree/master/notebooks), that will guide us through this tutorial.
 Most of the information can be found there, and this page is mainly meant as an overview of the content of the notebooks.
 
 As done in some previous masterclass, we will play with a toy system, the small alanine dipeptide molecule in vacuum (ala2).
@@ -55,19 +55,19 @@ It has the advantage of being a well-known system, cheap to simulate and with a 
 Ala2 has two main metastable basins which can be identified by a very efficient collective variable (CV), the $\phi$ torsional angle.
 Here is its free energy surface (FES) as a function of the $\phi$ and $\psi$ angles:
 
-![Alanine dipeptide free energy surface along the Ramachandran angles](figures/masterclass-22-03-ala2_FES.png) 
+![Alanine dipeptide free energy surface along the Ramachandran angles](figures/masterclass-22-03-ala2_FES.png)
 
 _All the exercises have been tested with PLUMED version 2.8.0 and GROMACS 2020.6_
 
 ## Exercise 1: Sampling expanded ensembles with OPES
 
 We start by using OPES to sample expanded ensembles.
-This probably is not a familiar application of adaptive-bias enhanced sampling for most of PLUMED users, so we will start with a little 
+This probably is not a familiar application of adaptive-bias enhanced sampling for most of PLUMED users, so we will first introduce some theory background.
 
 ### 1.1 Multithermal simulations
 
-The first example we consider is a multithermal simulation of alanine dipeptide. 
-One can use replica exchange to perform a parallel tempering simulation and sample the two metastable states of alanine dipeptide. 
+The first example we consider is a multithermal simulation of alanine dipeptide.
+One can use replica exchange to perform a parallel tempering simulation and sample the two metastable states of alanine dipeptide.
 Here instead, we want to sample the same multithermal distribution not by combining simulations at different temperatures, but by adding a bias potential to a single simulation.
 You can find details on the relevant theory by searching through the graph for this tutorial.
 
@@ -77,19 +77,19 @@ You can find details on the relevant theory by searching through the graph for t
 We choose 3 temperatures $T_0, T_1, T_2$, ranging from 300 K to 1000 K, and setup our GROMACS simulation to run at $T_0=300$ K.
 Our target distribution is then:
 
-$$ p^{\text{tg}}(\mathbf{x})=\frac{1}{3}\left[\frac{e^{-\frac{1}{k_BT_0}U(\mathbf{x})}}{Z_0}+ \frac{e^{-\frac{1}{k_BT_1}U(\mathbf{x})}}{Z_1}+\frac{e^{-\frac{1}{k_BT_2}U(\mathbf{x})}}{Z_2}\right] .$$
+$$p^{\text{tg}}(\mathbf{x})=\frac{1}{3}\left[\frac{e^{-\frac{1}{k_BT_0}U(\mathbf{x})}}{Z_0}+ \frac{e^{-\frac{1}{k_BT_1}U(\mathbf{x})}}{Z_1}+\frac{e^{-\frac{1}{k_BT_2}U(\mathbf{x})}}{Z_2}\right] .$$
 
 This can be rewritten highlighting $P(\mathbf{x})$
 
-$$ p^{\text{tg}}(\mathbf{x})=P(\mathbf{x})\frac{1}{3}\left[1+ e^{-\left(\frac{1}{k_BT_1}-\frac{1}{k_BT_0}\right)U(\mathbf{x})}\frac{Z_0}{Z_1}+e^{-\left(\frac{1}{k_BT_2}-\frac{1}{k_BT_0}\right)U(\mathbf{x})}\frac{Z_0}{Z_2}\right] ,$$ 
+$$p^{\text{tg}}(\mathbf{x})=P(\mathbf{x})\frac{1}{3}\left[1+ e^{-\left(\frac{1}{k_BT_1}-\frac{1}{k_BT_0}\right)U(\mathbf{x})}\frac{Z_0}{Z_1}+e^{-\left(\frac{1}{k_BT_2}-\frac{1}{k_BT_0}\right)U(\mathbf{x})}\frac{Z_0}{Z_2}\right] ,$$
 
 and then using $\Delta F_i = -k_B T_0 \log \frac{Z_i}{Z_0}$:
 
-$$ p^{\text{tg}}(\mathbf{x})=P(\mathbf{x})\frac{1}{3}\left[1+ e^{-\frac{1-T_0/T_1}{k_BT_0}U(\mathbf{x})+\frac{1}{k_BT_0}\Delta F_1}+e^{-\frac{1-T_0/T_2}{k_BT_0}U(\mathbf{x})+\frac{1}{k_BT_0}\Delta F_2}\right] .$$
+$$p^{\text{tg}}(\mathbf{x})=P(\mathbf{x})\frac{1}{3}\left[1+ e^{-\frac{1-T_0/T_1}{k_BT_0}U(\mathbf{x})+\frac{1}{k_BT_0}\Delta F_1}+e^{-\frac{1-T_0/T_2}{k_BT_0}U(\mathbf{x})+\frac{1}{k_BT_0}\Delta F_2}\right] .$$
 
 So we just need to know $\Delta F_1$ and $\Delta F_2$, and we can sample the target multithermal distribution by using the following bias:
 
-$$ V(U) = - k_B T_0 \log \frac{1}{3}\left[1+ e^{-\frac{1-T_0/T_1}{k_BT_0}U(\mathbf{x})+\frac{1}{k_BT_0}\Delta F_1}+e^{-\frac{1-T_0/T_2}{k_BT_0}U(\mathbf{x})+\frac{1}{k_BT_0}\Delta F_2}\right] ,$$
+$$V(U) = - k_B T_0 \log \frac{1}{3}\left[1+ e^{-\frac{1-T_0/T_1}{k_BT_0}U(\mathbf{x})+\frac{1}{k_BT_0}\Delta F_1}+e^{-\frac{1-T_0/T_2}{k_BT_0}U(\mathbf{x})+\frac{1}{k_BT_0}\Delta F_2}\right] ,$$
 
 that is a function only of the potential energy $U=U(\mathbf{x})$.
 In the OPES spirit, we estimate on-the-fly these free energy differences using a simple reweighting, and iteratively reach the target distribution.
@@ -228,7 +228,7 @@ We can also check the way the bias converges by focusing on the estimate of the 
 In order to experiment with more than two CVs, we have to introduce a new system, alanine tetrapeptide in vacuum (ala4).
 It is a bigger brother of ala2, with not one but three $\phi$ and $\psi$ torsional angles, that can be used to sample its 8 metastable basins.
 
-We can try to sample ala4 with each of the tree methods, [METAD](https://www.plumed.org/doc-master/user-doc/html/_m_e_t_a_d.html), [OPES_METAD](https://www.plumed.org/doc-master/user-doc/html/_o_p_e_s__m_e_t_a_d.html), and [OPES_METAD_EXPLORE](https://www.plumed.org/doc-master/user-doc/html/_o_p_e_s__m_e_t_a_d__e_x_p_l_o_r_e.html). 
+We can try to sample ala4 with each of the tree methods, [METAD](https://www.plumed.org/doc-master/user-doc/html/_m_e_t_a_d.html), [OPES_METAD](https://www.plumed.org/doc-master/user-doc/html/_o_p_e_s__m_e_t_a_d.html), and [OPES_METAD_EXPLORE](https://www.plumed.org/doc-master/user-doc/html/_o_p_e_s__m_e_t_a_d__e_x_p_l_o_r_e.html).
 How will the respective input files look like?
 
 We run only short simulations to see how quickly the CV space is sampled by the various methods, and not for converging a FES.
