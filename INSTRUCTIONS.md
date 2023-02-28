@@ -126,7 +126,7 @@ The main advantages are that choosing the number and location of the umbrellas b
 We choose as CV the $\phi$ angle.
 The ECVs we need for this type of expansion are the following:
 
-$$ \Delta u_i = \frac{(\phi-\phi_i)^2}{2\sigma^2}\, , $$
+$$\Delta u_i = \frac{(\phi-\phi_i)^2}{2\sigma^2} ,$$
 
 where $\phi_i$ are the fixed centers of the umbrellas and $\sigma$ determines their width.
 Usually in umbrella sampling another parameter is used, $k=1/\sqrt{\sigma}$, but we will see in the notebook why we made a different choice.
