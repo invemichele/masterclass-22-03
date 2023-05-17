@@ -309,44 +309,43 @@ for n in range(len(fields_pos)-1):
     cmd=subprocess.Popen(bck_script+' -i '+outfile,shell=True)
     cmd.wait()
 # actual print
-  f=open(outfile,'w')
-  fields='#! FIELDS '+name_cv_x
-  if dim2:
-    fields+=' '+name_cv_y
-  fields+=' file.free'
-  if calc_der:
-    fields+=' der_'+name_cv_x
+  with open(outfile,'w') as f:
+    fields='#! FIELDS '+name_cv_x
     if dim2:
-      fields+=' der_'+name_cv_y
-  f.write(fields+'\n')
-  if calc_deltaF:
-    f.write('#! SET DeltaF %g\n'%(deltaF))
-  f.write('#! SET min_'+name_cv_x+' %g\n'%(grid_min_x))
-  f.write('#! SET max_'+name_cv_x+' %g\n'%(grid_max_x))
-  f.write('#! SET nbins_'+name_cv_x+' %g\n'%(grid_bin_x))
-  if period_x==0:
-    f.write('#! SET periodic_'+name_cv_x+' false\n')
-  else:
-    f.write('#! SET periodic_'+name_cv_x+' true\n')
-  if not dim2:
-    for i in range(grid_bin_x):
-      line=(fmt+'  '+fmt)%(grid_cv_x[i],fes[i])
-      if calc_der:
-        line+=(' '+fmt)%(der_fes_x[i])
-      f.write(line+'\n')
-  else:
-    f.write('#! SET min_'+name_cv_y+' %g\n'%(grid_min_y))
-    f.write('#! SET max_'+name_cv_y+' %g\n'%(grid_max_y))
-    f.write('#! SET nbins_'+name_cv_y+' %g\n'%(grid_bin_y))
-    if period_y==0:
-      f.write('#! SET periodic_'+name_cv_y+' false\n')
+      fields+=' '+name_cv_y
+    fields+=' file.free'
+    if calc_der:
+      fields+=' der_'+name_cv_x
+      if dim2:
+        fields+=' der_'+name_cv_y
+    f.write(fields+'\n')
+    if calc_deltaF:
+      f.write('#! SET DeltaF %g\n'%(deltaF))
+    f.write('#! SET min_'+name_cv_x+' %g\n'%(grid_min_x))
+    f.write('#! SET max_'+name_cv_x+' %g\n'%(grid_max_x))
+    f.write('#! SET nbins_'+name_cv_x+' %g\n'%(grid_bin_x))
+    if period_x==0:
+      f.write('#! SET periodic_'+name_cv_x+' false\n')
     else:
-      f.write('#! SET periodic_'+name_cv_y+' true\n')
-    for i in range(grid_bin_y):
-      for j in range(grid_bin_x):
-        line=(fmt+' '+fmt+'  '+fmt)%(x[i,j],y[i,j],fes[i,j])
+      f.write('#! SET periodic_'+name_cv_x+' true\n')
+    if not dim2:
+      for i in range(grid_bin_x):
+        line=(fmt+'  '+fmt)%(grid_cv_x[i],fes[i])
         if calc_der:
-          line+=(' '+fmt+' '+fmt)%(der_fes_x[i,j],der_fes_y[i,j])
+          line+=(' '+fmt)%(der_fes_x[i])
         f.write(line+'\n')
-      f.write('\n')
-  f.close()
+    else:
+      f.write('#! SET min_'+name_cv_y+' %g\n'%(grid_min_y))
+      f.write('#! SET max_'+name_cv_y+' %g\n'%(grid_max_y))
+      f.write('#! SET nbins_'+name_cv_y+' %g\n'%(grid_bin_y))
+      if period_y==0:
+        f.write('#! SET periodic_'+name_cv_y+' false\n')
+      else:
+        f.write('#! SET periodic_'+name_cv_y+' true\n')
+      for i in range(grid_bin_y):
+        for j in range(grid_bin_x):
+          line=(fmt+' '+fmt+'  '+fmt)%(x[i,j],y[i,j],fes[i,j])
+          if calc_der:
+            line+=(' '+fmt+' '+fmt)%(der_fes_x[i,j],der_fes_y[i,j])
+          f.write(line+'\n')
+        f.write('\n')
