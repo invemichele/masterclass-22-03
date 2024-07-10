@@ -1,5 +1,5 @@
 # PLUMED Masterclass-22-03: OPES method
-Repository of the data for [PLUMED Masterclass 22.3](https://www.plumed.org/doc-master/user-doc/html/masterclass-22-03.html) (see also [here](https://www.plumed.org/masterclass)).
+Repository of the data for [PLUMED Masterclass 22.3](https://plumed-school.github.io/lessons/22/003/data/NAVIGATION.html) (see also [here](https://www.plumed.org/masterclass)).
 
 The slides of the masterclass can be found at [this link](https://docs.google.com/presentation/d/1G94Kjq3kn3sNxFi2fZoISG3OMNq_erGIgleyr8y2YEA).
 The video recording is also available for both the [lecture](https://youtu.be/1XYGfA4kJ1c) and the [tutorial correction](https://youtu.be/Rn5JgItgKX4).
